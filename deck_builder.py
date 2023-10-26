@@ -6,15 +6,24 @@ card_data = [
     },
     {
         "card_type": "Hazard",
-        "values": ["flat tire", "out of gas", "accident", "red light"],
+        "values": ["flat tire", "out of gas", "accident", "speed limit", "red light"],
         "counts": [3, 3, 3, 5],
     },
     {
         "card_type": "Remedy",
-        "values": ["spare tire", "gas", "repairs", "green light"],
+        "values": ["spare tire", "gas", "repairs", "end of limit", "green light"],
         "counts": [6, 6, 6, 14],
+    },
+    {
+        "card_type": "Safety",
+        "values": ["puncture-proof", "extra tank", "driving ace", "right of way"],
+        "counts": [1, 1, 1, 1],
     },
 ]
 
-for i in card_data[2]["values"]:
+deck = []
+for i in card_data[0]["values"]:
     print(i)
+
+for i in card_data[0]["counts"]:
+    pass
