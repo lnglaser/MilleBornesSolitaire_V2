@@ -22,15 +22,26 @@ card_data = [
 ]
 
 deck = []
-for i in card_data[0]["values"]:
-    print(i)
+# for i in card_data[0]["values"]:
+#     print(i)
 
-for number_of_cards in card_data[0]["counts"]:
-    card_number = 0
-    for count in range(number_of_cards):
+# for number_of_cards in card_data[0]["counts"]:
+#     card_number = 0
+#     for count in range(number_of_cards):
+#         print("Count: ", count)
+#         card = {
+#             "card_type": card_data[0]["card_type"],
+#             "value": card_data[0]["values"][0],
+#         }
+#         card_number += 1
+#         print(f"{card_number}: {card}")
+
+for i in card_data[0]["counts"]:
+    current_count = i
+    print(current_count)
+    for j in range(0, current_count):
         card = {
             "card_type": card_data[0]["card_type"],
-            "value": card_data[0]["values"][4],
+            "value": card_data[0]["values"],
         }
-        card_number += 1
-        print(f"{card_number}: {card}")
+        print(card)
