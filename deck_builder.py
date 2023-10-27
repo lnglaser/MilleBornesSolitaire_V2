@@ -42,6 +42,6 @@ for i in card_data[0]["counts"]:
     for j in range(0, current_count):
         card = {
             "card_type": card_data[0]["card_type"],
-            "value": card_data[0]["values".index(i)],
+            "value": card_data[0]["values"],
         }
         print(card)
