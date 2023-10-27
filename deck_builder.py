@@ -21,39 +21,13 @@
 #     },
 # ]
 
-# deck = []
-# for i in card_data[0]["values"]:
-#     print(i)
-
-# for number_of_cards in card_data[0]["counts"]:
-#     card_number = 0
-#     for count in range(number_of_cards):
-#         print("Count: ", count)
-#         card = {
-#             "card_type": card_data[0]["card_type"],
-#             "value": card_data[0]["values"][0],
-#         }
-#         card_number += 1
-#         print(f"{card_number}: {card}")
-
-# for i in card_data[0]["counts"]:
-#     current_count = i
-#     print(current_count)
-#     for j in range(0, current_count):
-#         card = {
-#             "card_type": card_data[0]["card_type"],
-#             "value": card_data[0]["values"],
-#         }
-#         print(card)
-
-
 card_id = 0
 
 deck = {}
 
 for i in range(46):
     card_id += 1
-    deck[card_id] = {"card_type": "Mileage"}
+    deck[card_id] = {"card_type": "mileage"}
     if card_id > 0 and card_id <= 10:
         deck[card_id].update({"value": 25})
     elif card_id >= 11 and card_id <= 20:
@@ -65,6 +39,13 @@ for i in range(46):
     elif card_id >= 43 and card_id <= 46:
         deck[card_id].update({"value": 200})
 
-    print(card_id, deck[card_id])
-
-print(deck)
+for i in range(14):
+    card_id += 1
+    deck[card_id] = {"card_type": "hazard"}
+    if card_id >= 47 and card_id <= 49:
+        deck[card_id].update({"value": "flat tire"})
+    if card_id >= 53 and card_id <= 55:
+        deck[card_id].update({"value": "out of gas"})
+    if card_id >= 56 and card_id <= 58:
+        deck[card_id].update({"value": "accident"})
+print(card_id, deck[card_id])
