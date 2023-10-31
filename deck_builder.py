@@ -1,3 +1,8 @@
+# might restructure this data as having the "values" be the new keys, and the "counts" be those associated values
+
+from operator import indexOf
+
+
 card_data = [
     {
         "card_type": "Mileage",
@@ -21,6 +26,14 @@ card_data = [
     },
 ]
 
+# card_data = {
+#     "25": 10,
+#     "50": 10,
+#     "75": 10,
+#     "100": 12,
+#     "200": 4,
+# }
+
 card_id = 0
 
 deck = {}
@@ -31,6 +44,11 @@ for card in card_data:
         for number in range(1, amount + 1):
             card_id += 1
             deck[card_id] = {"card_type": card["card_type"]}
+            # position = card["counts"].index(amount)
+            value_indices = [index for (index, item) in enumerate(card["counts"])]
+            print(f"value indices: {value_indices}")
+            for index in value_indices:
+                deck[card_id].update({"value": card["values"][index]})
             print(card_id, number)
 
         #     deck[card_id].update({"value": card["values"]})
