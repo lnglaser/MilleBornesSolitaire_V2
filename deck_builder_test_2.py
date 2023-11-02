@@ -39,5 +39,22 @@ card_data = [
         ],
     },
 ]
-for i in card_data[0]["value_and_count"]:
-    print(card_data[0]["card_type"], i)
+
+deck = {}
+card_id = 0
+
+
+def add_card(card_category):
+    for i in card_category["value_and_count"]:
+        for j in range(i[1]):
+            global card_id
+            card_id += 1
+            deck[card_id] = {"card_type": card_category["card_type"]}
+            deck[card_id].update({"value": i[0]})
+
+
+for category in card_data:
+    add_card(category)
+
+for card in deck:
+    print(card, deck[card])
