@@ -1,12 +1,14 @@
+import random
+
 card_data = [
     {
         "card_type": "Mileage",
         "value_and_count": [
-            ("25", 10),
-            ("50", 10),
-            ("75", 10),
-            ("100", 12),
-            ("200", 4),
+            (25, 10),
+            (50, 10),
+            (75, 10),
+            (100, 12),
+            (200, 4),
         ],
     },
     {
@@ -58,3 +60,12 @@ for category in card_data:
 
 for card in deck:
     print(card, deck[card])
+
+shuffled_deck = list(deck.values())
+random.shuffle(shuffled_deck)
+
+for card in shuffled_deck:
+    print(card["card_type"], card["value"])
+
+for card in range(len(shuffled_deck)):
+    print(card, shuffled_deck[card])
