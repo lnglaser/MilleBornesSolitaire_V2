@@ -1,3 +1,6 @@
-from card_model import Card
+# import deck_builder_2
+from card_data import card_data
+from deck_builder_2 import DeckBuilder
 
-deck = []
+for card_category in card_data:
+    print(card_category)
