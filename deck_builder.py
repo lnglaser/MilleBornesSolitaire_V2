@@ -64,8 +64,5 @@ for card in deck:
 shuffled_deck = list(deck.values())
 random.shuffle(shuffled_deck)
 
-for card in shuffled_deck:
-    print(card["card_type"], card["value"])
-
 for card in range(len(shuffled_deck)):
     print(card, shuffled_deck[card])
