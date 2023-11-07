@@ -8,7 +8,10 @@ deck_builder = DeckBuilder(card_data)
 
 deck = []
 for card_category in card_data:
+    print(f"card category: {card_category}")
     new_cards = deck_builder.add_card(card_category=card_category)
+    print("main test - new cards")
+    print(new_cards)
     deck.append(new_cards)
 
 print(deck)

@@ -53,6 +53,7 @@ def add_card(card_category):
             card_id += 1
             deck[card_id] = {"card_type": card_category["card_type"]}
             deck[card_id].update({"value": i[0]})
+    return self.deck
 
 
 for category in card_data:
