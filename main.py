@@ -14,5 +14,8 @@ deck_builder = DeckBuilder(card_data)
 #     print(new_cards)
 # deck.append(new_cards)
 
+for card_category in card_data:
+    deck = deck_builder.add_card(card_category)
+# deck = deck_builder.add_card(card_data[0])
 deck = deck_builder.get_all_cards()
 print(deck)

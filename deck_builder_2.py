@@ -21,4 +21,5 @@ class DeckBuilder:
         random.shuffle(shuffled_deck)
 
     def get_all_cards(self):
+        print(f"all cards test: {self.all_cards}")
         return self.all_cards
