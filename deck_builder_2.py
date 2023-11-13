@@ -16,10 +16,12 @@ class DeckBuilder:
                 self.all_cards[self.card_id].update({"value": i[0]})
                 print(f"Test from deck_builder_2: {self.all_cards[self.card_id]}")
 
-    def shuffle_deck(self, deck):
-        shuffled_deck = list(self.all_cards.values())
+    def shuffle_deck(self, all_cards):
+        shuffled_deck = list(all_cards.values())
         random.shuffle(shuffled_deck)
+        print(f"DB - Shuffle Deck test:\n{shuffled_deck}")
+        return shuffled_deck
 
     def get_all_cards(self):
-        print(f"all cards test: {self.all_cards}")
+        print(f"DB - all cards test: {self.all_cards}")
         return self.all_cards

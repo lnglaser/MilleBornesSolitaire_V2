@@ -1,3 +1,4 @@
+import random
 from card_data import card_data
 from deck_builder_2 import DeckBuilder
 
@@ -17,5 +18,7 @@ deck_builder = DeckBuilder(card_data)
 for card_category in card_data:
     deck = deck_builder.add_card(card_category)
 # deck = deck_builder.add_card(card_data[0])
+
 deck = deck_builder.get_all_cards()
-print(deck)
+deck = deck_builder.shuffle_deck(deck)
+print(f"Main test:\n{deck}")
