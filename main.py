@@ -1,4 +1,3 @@
-import random
 from card_data import card_data
 from deck_builder_2 import DeckBuilder
 
