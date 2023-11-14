@@ -20,6 +20,7 @@ print(f"hand test:{dealer.hand_size}")
 player_hand = []
 opponent_hand = []
 
+# Generate initial hands for player and opponent
 for i in range(dealer.hand_size):
     player_hand.append(dealer.deal_cards(deck))
     opponent_hand.append(dealer.deal_cards(deck))
