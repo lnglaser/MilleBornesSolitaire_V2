@@ -16,16 +16,20 @@ class Dealer:
         self.deck = shuffled_deck
         self.hand_size = 6
 
+    # Returns top card in deck
     def deal_cards(self, deck):
         top_card = deck[0]
         deck.pop(0)
         return top_card
 
+    # Removes selected card
     def discard(self, card, hand):
         discarded_card = card
         print(f"card discarded: {discarded_card}")
         hand.remove(card)
         return hand
 
-    def play_card(self, card):
-        pass
+    # Add mileage value to score:
+    def play_miles(self, card, score):
+        points = int(card.get("value"))
+        return points

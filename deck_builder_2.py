@@ -21,9 +21,9 @@ class DeckBuilder:
     def shuffle_deck(self, all_cards):
         shuffled_deck = list(all_cards.values())
         random.shuffle(shuffled_deck)
-        print(f"DB - Shuffle Deck test:\n{shuffled_deck}")
+        # print(f"DB - Shuffle Deck test:\n{shuffled_deck}")
         return shuffled_deck
 
     def get_all_cards(self):
-        print(f"DB - all cards test: {self.all_cards}")
+        # print(f"DB - all cards test: {self.all_cards}")
         return self.all_cards

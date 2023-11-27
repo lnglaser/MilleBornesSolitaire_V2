@@ -15,19 +15,42 @@ print(f"Main test:\n{deck}")
 
 dealer = Dealer(deck)
 
-print(f"hand test:{dealer.hand_size}")
+player = {
+    "hand": [],
+    "score": 0,
+    "battle_pile": "",
+    "speed_pile": "",
+    "safety_pile": [],
+}
 
-player_hand = []
-opponent_hand = []
+opponent = {
+    "hand": [],
+    "score": 0,
+    "battle_pile": "",
+    "speed_pile": "",
+    "safety_pile": [],
+}
 
-# Generate initial hands for player and opponent
+# Generate initial hands for player and opponent - retrieve hand size defined in dealer.py, and uses that
+# as range for adding cards to each
+
 for i in range(dealer.hand_size):
-    player_hand.append(dealer.deal_cards(deck))
-    opponent_hand.append(dealer.deal_cards(deck))
+    player["hand"].append(dealer.deal_cards(deck))
+    opponent["hand"].append(dealer.deal_cards(deck))
 
-print(f"main - player hand test: {type(player_hand)}\n{player_hand}")
-print(f"main - opponent hand test: {type(opponent_hand)}\n{opponent_hand}")
+# Testing print statements
+print(f"Main - player hand:\n{player['hand']}")
+print(f"Main - opponent hand:\n{opponent['hand']}")
 print(f"new top card:\n{deck[0]}")
 
-player_hand = dealer.discard(player_hand[0], player_hand)
-print(f"new player hand:\n{player_hand}")
+player_move = input("What would you like to do? (play/discard): ")
+if player_move == "discard":
+    player_choice = int(input("Which card do you want to discard? (0-5)"))
+    player["hand"] = dealer.discard(player["hand"][player_choice], player["hand"])
+    player["hand"].append(dealer.deal_cards(deck))
+elif player_move == "play":
+    player_choice = int(input("Which card do you want to play? (0-5)"))
+    if player["hand"][player_choice]["card_type"] == "Mileage":
+        points = dealer.play_miles(player["hand"][player_choice], player["score"])
+        print(f"Points added to score: {points}")
+print(f"new player hand:\n{player['hand']}")
