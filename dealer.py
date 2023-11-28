@@ -32,4 +32,9 @@ class Dealer:
     # Add mileage value to score:
     def play_miles(self, card, score):
         points = int(card.get("value"))
-        return points
+        score += points
+        return score
+
+    def play_hazard(self, card, battle_pile):
+        battle_pile = card["value"]
+        return battle_pile
