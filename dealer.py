@@ -36,5 +36,14 @@ class Dealer:
         return score
 
     def play_hazard(self, card, battle_pile):
-        battle_pile = card["value"]
+        battle_pile.update(card)
+        return battle_pile
+
+    # Add nested conditions for various hazards and remedies?
+    # To reduce individual conditions, maybe add KV pair to cards that match
+    # between hazards and remedies? (maybe add extra safety card to match up
+    # evenly)
+    def play_remedy(self, card, battle_pile):
+        if battle_pile["card_type"] == "Hazard":
+            battle_pile.update(card)
         return battle_pile

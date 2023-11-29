@@ -18,7 +18,7 @@ dealer = Dealer(deck)
 player = {
     "hand": [],
     "score": 0,
-    "battle_pile": "",
+    "battle_pile": {"card_type": "Hazard", "value": "flat tire"},
     "speed_pile": "",
     "safety_pile": [],
 }
@@ -26,7 +26,7 @@ player = {
 opponent = {
     "hand": [],
     "score": 0,
-    "battle_pile": "",
+    "battle_pile": {},
     "speed_pile": "",
     "safety_pile": [],
 }
@@ -64,5 +64,9 @@ elif player_move == "play":
             player["hand"][card_number], opponent["battle_pile"]
         )
         print(f"Opponent's battle pile: {opponent['battle_pile']}")
-
+    elif player["hand"][card_number]["card_type"] == "Remedy":
+        player["battle_pile"] = dealer.play_remedy(
+            player["hand"][card_number], player["battle_pile"]
+        )
+        print(f"Play remedy - Player's battle pile: {player['battle_pile']}")
 print(f"new player hand:\n{player['hand']}")
