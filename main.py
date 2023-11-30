@@ -73,14 +73,12 @@ elif player_move == "play":
         if player["hand"][card_number]["value"] == "speed limit":
             opponent["speed_pile"] = dealer.play_hazard(
                 player["hand"][card_number],
-                opponent["battle_pile"],
                 opponent["speed_pile"],
             )
         else:
             opponent["battle_pile"] = dealer.play_hazard(
                 player["hand"][card_number],
                 opponent["battle_pile"],
-                opponent["speed_pile"],
             )
 
         print(f"Opponent's battle pile: {opponent['battle_pile']}")
