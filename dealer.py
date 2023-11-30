@@ -35,15 +35,36 @@ class Dealer:
         score += points
         return score
 
-    def play_hazard(self, card, battle_pile):
-        battle_pile.update(card)
-        return battle_pile
+    def play_hazard(self, card, battle_pile, speed_pile):
+        if card["value"] == "speed limit" and speed_pile != "speed limit":
+            speed_pile = "speed limit"
+            return speed_pile
+        else:
+            battle_pile.update(card)
+            return battle_pile
 
     # Add nested conditions for various hazards and remedies?
     # To reduce individual conditions, maybe add KV pair to cards that match
     # between hazards and remedies? (maybe add extra safety card to match up
     # evenly)
-    def play_remedy(self, card, battle_pile):
-        if battle_pile["card_type"] == "Hazard":
-            battle_pile.update(card)
-        return battle_pile
+    # def play_remedy(self, card, battle_pile):
+    #     if (
+    #         battle_pile["card_type"] == "Hazard"
+    #         and battle_pile["match_ID"] == card["match_ID"]
+    #     ):
+    #         battle_pile.update(card)
+    #         print(f"dealer test - battle pile: {battle_pile}")
+    #     return battle_pile
+
+    def play_remedy(self, card, battle_pile, speed_pile):
+        if card["value"] == "end of limit" and speed_pile == "speed limit":
+            speed_pile = "end of limit"
+            return speed_pile
+        else:
+            if (
+                battle_pile["card_type"] == "Hazard"
+                and battle_pile["match_ID"] == card["match_ID"]
+            ):
+                battle_pile.update(card)
+                print(f"dealer test - battle pile: {battle_pile}")
+            return battle_pile
