@@ -31,7 +31,8 @@ opponent = {
     "safety_pile": [],
 }
 
-# May need to add variable for a turn indicator to prevent losing a turn in case player makes a mistake
+# May need to add variable for a turn indicator to prevent losing a turn in case player makes a mistake, and
+# to make coup fourre functions possible
 
 # Generate initial hands for player and opponent - retrieve hand size defined in dealer.py, and uses that
 # as range for adding cards to each
@@ -96,5 +97,12 @@ elif player_move == "play":
         print(f"Play remedy - Player's battle pile: {player['battle_pile']}")
         player["hand"] = dealer.discard(player["hand"][card_number], player["hand"])
         player["hand"].append(dealer.deal_cards(deck))
+
+    # Playing a safety on yourself
+    elif player["hand"][card_number]["card_type"] == "Safety":
+        player["safety_pile"] = dealer.play_safety(
+            player["hand"][card_number], player["safety_pile"]
+        )
+        print(f"Player's safety pile: {player['safety_pile']}")
 
 print(f"new player hand:\n{player['hand']}")

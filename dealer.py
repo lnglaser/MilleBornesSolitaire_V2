@@ -55,3 +55,7 @@ class Dealer:
                 pile.update(card)
                 print(f"dealer test - battle pile: {pile}")
         return pile
+
+    def play_safety(self, card, pile):
+        pile.append(card)
+        return pile
