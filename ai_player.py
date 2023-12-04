@@ -3,13 +3,13 @@ class AI_player:
         self.hand = hand
 
     def ai_miles(self):
-        pass
+        print("Computer played miles")
 
     def ai_hazard(self):
-        pass
+        print("Computer played hazard")
 
     def ai_remedy(self):
-        pass
+        print("Computer played remedy")
 
     def ai_safety(self):
         pass

@@ -118,9 +118,11 @@ def player_turn():
 
         # Playing a safety on yourself
         elif player_info["hand"][card_number]["card_type"] == "Safety":
-            player_info["safety_pile"] = dealer.play_safety(
-                player_info["hand"][card_number], player_info["safety_pile"]
+            safety_update = dealer.play_safety(
+                player_info["hand"][card_number], player_info["safety_pile"], player_info["score"]
             )
+            player_info["safety_pile"] = safety_update[0]
+            player_info["score"] = safety_update[1]
             print(f"Player's safety pile: {player_info['safety_pile']}")
 
     print(f"new player hand:\n{player_info['hand']}")

@@ -57,6 +57,7 @@ class Dealer:
                 print(f"dealer test - battle pile: {pile}")
         return pile
 
-    def play_safety(self, card, pile):
+    def play_safety(self, card, pile, score):
         pile.append(card)
-        return pile
+        score += 100
+        return pile, score
