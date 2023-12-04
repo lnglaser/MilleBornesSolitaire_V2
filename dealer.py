@@ -30,10 +30,11 @@ class Dealer:
         return hand
 
     # Add mileage value to score:
-    def play_miles(self, card, score):
+    def play_miles(self, card, miles, score):
         points = int(card.get("value"))
         score += points
-        return score
+        miles += points
+        return miles, score
 
     def play_hazard(self, card, pile):
         if card["value"] == "speed limit" and pile != "speed limit":

@@ -21,6 +21,7 @@ opponent = AI_player
 player_info = {
     "hand": [],
     "score": 0,
+    "miles": 0,
     "battle_pile": {"card_type": "Hazard", "value": "flat tire", "match_ID": 1},
     "speed_pile": "",
     "safety_pile": [],
@@ -29,6 +30,7 @@ player_info = {
 opponent_info = {
     "hand": [],
     "score": 0,
+    "miles": 0,
     "battle_pile": {},
     "speed_pile": "",
     "safety_pile": [],
@@ -70,16 +72,19 @@ def player_turn():
     elif player_move == "play":
         card_number = int(input("Which card do you want to play? (0-6)"))
 
-        # Adding to your score
+        # Adding miles to your score
         if player_info["hand"][card_number]["card_type"] == "Mileage":
-            player_info["score"] = dealer.play_miles(
-                player_info["hand"][card_number], player_info["score"]
+            points_update = dealer.play_miles(
+                player_info["hand"][card_number], player_info["miles"], player_info["score"]
             )
+            player_info["miles"] = points_update[0]
+            player_info["score"] = points_update[1]
             player_info["hand"] = dealer.discard(
                 player_info["hand"][card_number], player_info["hand"]
             )
             player_info["hand"].append(dealer.deal_cards(deck))
             print(f"Updated score: {player_info['score']}")
+            print(f"Updated miles: {player_info['miles']}")
 
         # Playing a hazard on opponent
         elif player_info["hand"][card_number]["card_type"] == "Hazard":
