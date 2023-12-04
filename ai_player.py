@@ -1,6 +1,9 @@
 class AI_player:
-    def __init__(self, hand):
-        self.hand = hand
+    def __init__(self, info):
+        self.ai_info = info
+
+    def ai_turn(self, ai_info):
+        pass
 
     def ai_miles(self):
         print("Computer played miles")
@@ -12,4 +15,4 @@ class AI_player:
         print("Computer played remedy")
 
     def ai_safety(self):
-        pass
+        print("Computer played safety")

@@ -14,8 +14,8 @@ deck = deck_builder.get_all_cards()
 deck = deck_builder.shuffle_deck(deck)
 # print(f"Main test:\n{deck}")
 
-dealer = Dealer(deck)
-
+# dealer = Dealer(deck)
+dealer = Dealer()
 opponent = AI_player
 
 player_info = {
@@ -125,7 +125,10 @@ def player_turn():
             player_info["score"] = safety_update[1]
             print(f"Player's safety pile: {player_info['safety_pile']}")
 
-    print(f"new player hand:\n{player_info['hand']}")
+    print(f"new player hand:")
+    for i in player_info['hand']:
+        print(i)
 
 
-player_turn()
+while player_info["score"] < 1000:
+    player_turn()

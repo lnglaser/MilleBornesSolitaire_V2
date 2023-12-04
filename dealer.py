@@ -12,8 +12,8 @@
 
 
 class Dealer:
-    def __init__(self, shuffled_deck):
-        self.deck = shuffled_deck
+    def __init__(self):
+        # self.deck = shuffled_deck
         self.hand_size = 6
 
     # Returns top card in deck
