@@ -2,8 +2,8 @@ class AI_player:
     def __init__(self, info):
         self.ai_info = info
 
-    def ai_turn(self, ai_info):
-        pass
+    def ai_turn(self):
+        self.ai_miles()
 
     def ai_miles(self):
         print("Computer played miles")

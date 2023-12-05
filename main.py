@@ -17,8 +17,6 @@ deck = deck_builder.shuffle_deck(deck)
 # print(f"Main test:\n{deck}")
 
 # dealer = Dealer(deck)
-dealer = Dealer()
-opponent = AI_player
 
 player_info = {
     "hand": [],
@@ -38,6 +36,8 @@ opponent_info = {
     "safety_pile": [],
 }
 
+dealer = Dealer()
+opponent = AI_player(opponent_info)
 # May need to add variable for a turn indicator to prevent losing a turn in case player makes a mistake, and
 # to make coup fourre functions possible
 
@@ -56,7 +56,7 @@ for i in range(dealer.hand_size):
 def player_turn():
     player_info["hand"].append(dealer.deal_cards(deck))
     print(f"Player's current hand:")
-    for i in player_info['hand']:
+    for i in player_info["hand"]:
         print(i)
     player_move = input("What would you like to do? (play/discard): ")
 
@@ -74,7 +74,9 @@ def player_turn():
         # Adding miles to your score
         if player_info["hand"][card_number]["card_type"] == "Mileage":
             points_update = dealer.play_miles(
-                player_info["hand"][card_number], player_info["miles"], player_info["score"]
+                player_info["hand"][card_number],
+                player_info["miles"],
+                player_info["score"],
             )
             player_info["miles"] = points_update[0]
             player_info["score"] = points_update[1]
@@ -101,7 +103,9 @@ def player_turn():
         # Playing a safety on yourself
         elif player_info["hand"][card_number]["card_type"] == "Safety":
             safety_update = dealer.play_safety(
-                player_info["hand"][card_number], player_info["safety_pile"], player_info["score"]
+                player_info["hand"][card_number],
+                player_info["safety_pile"],
+                player_info["score"],
             )
             player_info["safety_pile"] = safety_update[0]
             player_info["score"] = safety_update[1]
@@ -112,10 +116,11 @@ def player_turn():
 
 
 while player_info["score"] < 1000:
-    system('clear')
+    # system("clear")
     print(f"Player's score: {player_info['score']}")
     print(f"Player's miles: {player_info['miles']}")
     print(f"Player's battle pile: {player_info['battle_pile']}")
     print(f"Player's speed pile: {player_info['speed_pile']}")
     print(f"Player's safety pile: {player_info['safety_pile']}")
     player_turn()
+    opponent.ai_turn()
