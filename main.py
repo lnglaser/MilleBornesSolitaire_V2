@@ -1,7 +1,9 @@
+from os import system
 from card_data import card_data
 from deck_builder_2 import DeckBuilder
 from dealer import Dealer
 from ai_player import AI_player
+
 
 deck_builder = DeckBuilder(card_data)
 
@@ -48,17 +50,14 @@ for i in range(dealer.hand_size):
     player_info["hand"].append(dealer.deal_cards(deck))
     opponent_info["hand"].append(dealer.deal_cards(deck))
 
-# Testing print statements
-# print(f"Main - player hand:\n{player['hand']}")
-print(f"Main - opponent hand:\n{opponent_info['hand']}")
-print(f"new top card:\n{deck[0]}")
-
 
 # This section will be for establishing and testing game logic - adjust to remove print
 # and input statements once work on frontend begins
 def player_turn():
     player_info["hand"].append(dealer.deal_cards(deck))
-    print(f"Main - player hand:\n{player_info['hand']}")
+    print(f"Player's current hand:")
+    for i in player_info['hand']:
+        print(i)
     player_move = input("What would you like to do? (play/discard): ")
 
     # Discard a card - calls discard and deal_cards methods from dealer.py
@@ -79,12 +78,6 @@ def player_turn():
             )
             player_info["miles"] = points_update[0]
             player_info["score"] = points_update[1]
-            player_info["hand"] = dealer.discard(
-                player_info["hand"][card_number], player_info["hand"]
-            )
-            player_info["hand"].append(dealer.deal_cards(deck))
-            print(f"Updated score: {player_info['score']}")
-            print(f"Updated miles: {player_info['miles']}")
 
         # Playing a hazard on opponent
         elif player_info["hand"][card_number]["card_type"] == "Hazard":
@@ -98,22 +91,11 @@ def player_turn():
                     player_info["hand"][card_number],
                     opponent_info["battle_pile"],
                 )
-            print(f"Opponent's battle pile: {opponent_info['battle_pile']}")
-            print(f"Opponent's speed pile: {opponent_info['speed_pile']}")
-            player_info["hand"] = dealer.discard(
-                player_info["hand"][card_number], player_info["hand"]
-            )
 
         # Playing a remedy on yourself
         elif player_info["hand"][card_number]["card_type"] == "Remedy":
-            print(f"Player's battle pile: {player_info['battle_pile']}")
             player_info["battle_pile"] = dealer.play_remedy(
                 player_info["hand"][card_number], player_info["battle_pile"]
-            )
-            print(print(f"Player's new battle pile: {player_info['battle_pile']}"))
-            print(f"Play remedy - Player's battle pile: {player_info['battle_pile']}")
-            player_info["hand"] = dealer.discard(
-                player_info["hand"][card_number], player_info["hand"]
             )
 
         # Playing a safety on yourself
@@ -123,12 +105,17 @@ def player_turn():
             )
             player_info["safety_pile"] = safety_update[0]
             player_info["score"] = safety_update[1]
-            print(f"Player's safety pile: {player_info['safety_pile']}")
 
-    print(f"new player hand:")
-    for i in player_info['hand']:
-        print(i)
+        player_info["hand"] = dealer.discard(
+            player_info["hand"][card_number], player_info["hand"]
+        )
 
 
 while player_info["score"] < 1000:
+    system('clear')
+    print(f"Player's score: {player_info['score']}")
+    print(f"Player's miles: {player_info['miles']}")
+    print(f"Player's battle pile: {player_info['battle_pile']}")
+    print(f"Player's speed pile: {player_info['speed_pile']}")
+    print(f"Player's safety pile: {player_info['safety_pile']}")
     player_turn()
