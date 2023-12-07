@@ -116,21 +116,21 @@ def player_turn():
 
 
 keep_going = True
-
-while player_info["miles"] < 1000 and keep_going == True:
-    next_turn = input("Do you want to keep playing? (Y/N): ").lower()
-    if next_turn == "n":
-        keep_going == False
-    system("clear")
-    print(f"Player's score: {player_info['score']}")
-    print(f"Player's miles: {player_info['miles']}")
-    print(f"Player's battle pile: {player_info['battle_pile']}")
-    print(f"Player's speed pile: {player_info['speed_pile']}")
-    print(f"Player's safety pile: {player_info['safety_pile']}")
-    player_turn()
-    ai_choice = opponent.ai_turn()
-    match ai_choice:
-        case "miles":
-            opponent.ai_miles()
-        case "hazard":
-            opponent.ai_hazard()
+while keep_going == True:
+    while player_info["miles"] < 1000:
+        next_turn = input("Do you want to keep playing? (Y/N): ").lower()
+        if next_turn == "n":
+            keep_going == False
+        system("clear")
+        print(f"Player's score: {player_info['score']}")
+        print(f"Player's miles: {player_info['miles']}")
+        print(f"Player's battle pile: {player_info['battle_pile']}")
+        print(f"Player's speed pile: {player_info['speed_pile']}")
+        print(f"Player's safety pile: {player_info['safety_pile']}")
+        player_turn()
+        ai_choice = opponent.ai_turn()
+        match ai_choice:
+            case "miles":
+                opponent.ai_miles()
+            case "hazard":
+                opponent.ai_hazard()
