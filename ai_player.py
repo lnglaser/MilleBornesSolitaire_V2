@@ -11,14 +11,16 @@ class AI_player:
         # print(self.ai_info)
 
         # Computer has no miles and empty battle pile - should try to find green light card
-        # Go through hand and try to find green light
+        # Go through hand and find green light cards
+        # Produce list of tuples with "green light" and index that matches card position in hand
         if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
             print(f"Computer's current hand: {self.ai_info['hand']}")
             hand_search = [
-                card.get("value", None)
+                ((card.get("value", None)), self.ai_info["hand"].index(card))
                 for card in self.ai_info["hand"]
                 if card["value"] == "green light"
             ]
+
             print(f"Computer remedy cards: {hand_search}")
             # Choosing between playing miles on self and playing hazard on other
             random_number = random.randint(1, 2)
