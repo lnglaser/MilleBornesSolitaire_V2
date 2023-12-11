@@ -15,8 +15,10 @@ class AI_player:
         # Produce list of tuples with "green light" and index that matches card position in hand
         if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
             print(f"Computer's current hand: {self.ai_info['hand']}")
+            # This code doesn't behave as expected, but doesn't need to do that to solve the specific
+            # problem - however, solving the bug will be useful for later methods.
             hand_search = [
-                ((card.get("value", None)), self.ai_info["hand"].index(card))
+                ((card.get("value", None)), (self.ai_info["hand"]).index(card))
                 for card in self.ai_info["hand"]
                 if card["value"] == "green light"
             ]
