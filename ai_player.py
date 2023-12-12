@@ -12,25 +12,18 @@ class AI_player:
 
         # Computer has no miles and empty battle pile - should try to find green light card
         # Go through hand and find green light cards
-        # Produce list of tuples with "green light" and index that matches card position in hand
+        # Produce list of tuples with 1) index and 2) card dictionary for all green light cards
         if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
             print(f"Computer's current hand: {self.ai_info['hand']}")
-            # This code doesn't behave as expected, but doesn't need to do that to solve the specific
-            # problem - however, solving the bug will be useful for later methods.
-            hand_search = [
-                ((card.get("value", None)), (self.ai_info["hand"]).index(card))
-                for card in self.ai_info["hand"]
-                if card["value"] == "green light"
-            ]
-
-            # look up enumerate? also generator?
             green_lights = []
             current_hand = enumerate(self.ai_info["hand"])
             for index, card in current_hand:
                 if card["value"] == "green light":
                     green_lights.append((index, card))
             print(f"Green light cards: {green_lights}")
-            print(f"Computer remedy cards: {hand_search}")
+            if green_lights != []:
+                print(f"returning choice: {green_lights[0][0]}")
+                return green_lights[0][0]
             # Choosing between playing miles on self and playing hazard on other
             random_number = random.randint(1, 2)
             print(f"Computer rolled {random_number}")

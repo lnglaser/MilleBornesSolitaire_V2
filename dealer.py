@@ -48,13 +48,16 @@ class Dealer:
     # To reduce individual conditions, maybe add KV pair to cards that match
     # between hazards and remedies? (maybe add extra safety card to match up
     # evenly)
+    # Need to add error case to prevent end of limit card being played to battle pile?
     def play_remedy(self, card, pile):
         if card["value"] == "end of limit" and pile == "speed limit":
             pile = "end of limit"
-        else:
-            if pile["card_type"] == "Hazard" and pile["match_ID"] == card["match_ID"]:
-                pile.update(card)
-                print(f"dealer test - battle pile: {pile}")
+        elif pile == {} and card["value"] == "green light":
+            pile.update(card)
+            print(f"dealer test - battle pile: {pile}")
+        elif pile["card_type"] == "Hazard" and pile["match_ID"] == card["match_ID"]:
+            pile.update(card)
+            print(f"dealer test - battle pile: {pile}")
         return pile
 
     def play_safety(self, card, pile, score):

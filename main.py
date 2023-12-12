@@ -129,8 +129,13 @@ while keep_going == True:
         print(f"Player's safety pile: {player_info['safety_pile']}")
         player_turn()
         ai_choice = opponent.ai_turn()
-        match ai_choice:
-            case "miles":
-                opponent.ai_miles()
-            case "hazard":
-                opponent.ai_hazard()
+        # match ai_choice:
+        #     case "miles":
+        #         opponent.ai_miles()
+        #     case "hazard":
+        #         opponent.ai_hazard()
+        print(f"card chosen: {opponent_info['hand'][ai_choice]}")
+        opponent_info["battle_pile"] = dealer.play_remedy(
+            opponent_info["hand"][ai_choice], opponent_info["battle_pile"]
+        )
+        print(f"Computer battle pile: {opponent_info['battle_pile']}")
