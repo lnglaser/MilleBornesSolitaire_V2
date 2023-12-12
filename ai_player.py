@@ -23,6 +23,13 @@ class AI_player:
                 if card["value"] == "green light"
             ]
 
+            # look up enumerate? also generator?
+            green_lights = []
+            current_hand = enumerate(self.ai_info["hand"])
+            for index, card in current_hand:
+                if card["value"] == "green light":
+                    green_lights.append((index, card))
+            print(f"Green light cards: {green_lights}")
             print(f"Computer remedy cards: {hand_search}")
             # Choosing between playing miles on self and playing hazard on other
             random_number = random.randint(1, 2)
