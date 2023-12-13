@@ -128,16 +128,21 @@ while keep_going == True:
         print(f"Player's speed pile: {player_info['speed_pile']}")
         print(f"Player's safety pile: {player_info['safety_pile']}")
         player_turn()
+        opponent_info["hand"].append(dealer.deal_cards(deck))
         ai_choice = opponent.ai_turn()
         print(f"AI choice result: {ai_choice}")
-        match ai_choice:
-            case "miles":
-                opponent.ai_miles()
-            case "hazard":
+        ai_choice_type = ai_choice[1]["card_type"]
+        print(f"AI choice card type: {ai_choice_type}")
+        print(f"card chosen: {opponent_info['hand'][ai_choice[0]]}")
+        match ai_choice_type:
+            case "Remedy":
+                opponent_info["battle_pile"] = dealer.play_remedy(
+                    opponent_info["hand"][ai_choice[0]], opponent_info["battle_pile"]
+                )
+            case "Hazard":
                 opponent.ai_hazard()
 
-        print(f"card chosen: {opponent_info['hand'][ai_choice[1]]}")
-        opponent_info["battle_pile"] = dealer.play_remedy(
-            opponent_info["hand"][ai_choice[1]], opponent_info["battle_pile"]
-        )
+        # opponent_info["battle_pile"] = dealer.play_remedy(
+        #     opponent_info["hand"][ai_choice[0]], opponent_info["battle_pile"]
+        # )
         print(f"Computer battle pile: {opponent_info['battle_pile']}")

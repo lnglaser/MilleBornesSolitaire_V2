@@ -22,23 +22,28 @@ class AI_player:
                     green_lights.append((index, card))
             print(f"Green light cards: {green_lights}")
             if green_lights != []:
-                print(f"returning choice: {green_lights[0][0]}")
-                move_choice = green_lights[0][1]["card_type"]
-                print(f"Move choice: {move_choice}")
-                return (move_choice, green_lights[0][0])
+                print(f"returning choice: {green_lights[0]}")
+                return green_lights[0]
+            # If computer has miles and green light -
+            # flip between playing hazard on opponent or playing miles on self?
+
+            # If computer has hazard -
+            # Look for matching remedy, play hazard, or discard
+
             # Choosing between playing miles on self and playing hazard on other
             random_number = random.randint(1, 2)
             print(f"Computer rolled {random_number}")
 
             match random_number:
                 case 1:
-                    return "miles"
+                    return "Miles"
                 case 2:
-                    return "hazard"
+                    return "Hazard"
         elif self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] != {}:
             print(f"Current battle pile: {self.ai_info['battle_pile']}")
-            return "hazard"
+            return "Hazard"
 
+    # Delete
     def ai_miles(self):
         print("Computer played miles")
 
