@@ -23,10 +23,13 @@ class AI_player:
             print(f"Green light cards: {green_lights}")
             if green_lights != []:
                 print(f"returning choice: {green_lights[0][0]}")
-                return green_lights[0][0]
+                move_choice = green_lights[0][1]["card_type"]
+                print(f"Move choice: {move_choice}")
+                return (move_choice, green_lights[0][0])
             # Choosing between playing miles on self and playing hazard on other
             random_number = random.randint(1, 2)
             print(f"Computer rolled {random_number}")
+
             match random_number:
                 case 1:
                     return "miles"
