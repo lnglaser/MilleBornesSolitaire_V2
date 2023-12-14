@@ -25,7 +25,7 @@ class Dealer:
     # Removes selected card
     def discard(self, card, hand):
         discarded_card = card
-        print(f"card discarded: {discarded_card}")
+        print(f"dealer - card discarded: {discarded_card}")
         hand.remove(card)
         return hand
 
@@ -54,10 +54,10 @@ class Dealer:
             pile = "end of limit"
         elif pile == {} and card["value"] == "green light":
             pile.update(card)
-            print(f"dealer test - battle pile: {pile}")
+            print(f"dealer - battle pile: {pile}")
         elif pile["card_type"] == "Hazard" and pile["match_ID"] == card["match_ID"]:
             pile.update(card)
-            print(f"dealer test - battle pile: {pile}")
+            print(f"dealer - battle pile: {pile}")
         return pile
 
     def play_safety(self, card, pile, score):

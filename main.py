@@ -55,7 +55,7 @@ for i in range(dealer.hand_size):
 # and input statements once work on frontend begins
 def player_turn():
     player_info["hand"].append(dealer.deal_cards(deck))
-    print(f"Player's current hand:")
+    print(f"main - Player's current hand:")
     for i in player_info["hand"]:
         print(i)
     player_move = input("What would you like to do? (play/discard): ")
@@ -122,27 +122,30 @@ while keep_going == True:
         if next_turn == "n":
             keep_going == False
         system("clear")
-        print(f"Player's score: {player_info['score']}")
-        print(f"Player's miles: {player_info['miles']}")
-        print(f"Player's battle pile: {player_info['battle_pile']}")
-        print(f"Player's speed pile: {player_info['speed_pile']}")
-        print(f"Player's safety pile: {player_info['safety_pile']}")
+        print(f"main - Player's score: {player_info['score']}")
+        print(f"main - Player's miles: {player_info['miles']}")
+        print(f"main - Player's battle pile: {player_info['battle_pile']}")
+        print(f"main - Player's speed pile: {player_info['speed_pile']}")
+        print(f"main - Player's safety pile: {player_info['safety_pile']}")
         player_turn()
         opponent_info["hand"].append(dealer.deal_cards(deck))
+        print(f"main - Computer's current hand: {opponent_info['hand']}")
         ai_choice = opponent.ai_turn()
-        print(f"AI choice result: {ai_choice}")
+        print(f"main - AI choice result: {ai_choice}")
         ai_choice_type = ai_choice[1]["card_type"]
-        print(f"AI choice card type: {ai_choice_type}")
-        print(f"card chosen: {opponent_info['hand'][ai_choice[0]]}")
+        print(f"main - AI choice card type: {ai_choice_type}")
+        print(f"main - card chosen: {opponent_info['hand'][ai_choice[0]]}")
         match ai_choice_type:
             case "Remedy":
                 opponent_info["battle_pile"] = dealer.play_remedy(
                     opponent_info["hand"][ai_choice[0]], opponent_info["battle_pile"]
                 )
             case "Hazard":
-                opponent.ai_hazard()
+                player_info["battle_pile"] = dealer.play_hazard(
+                    opponent_info["hand"][ai_choice[0]], player_info["battle_pile"]
+                )
 
         # opponent_info["battle_pile"] = dealer.play_remedy(
         #     opponent_info["hand"][ai_choice[0]], opponent_info["battle_pile"]
         # )
-        print(f"Computer battle pile: {opponent_info['battle_pile']}")
+        print(f"main - Computer battle pile: {opponent_info['battle_pile']}")
