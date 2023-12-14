@@ -141,10 +141,19 @@ while keep_going == True:
                     opponent_info["hand"][ai_choice[0]], opponent_info["battle_pile"]
                 )
             case "Hazard":
-                player_info["battle_pile"] = dealer.play_hazard(
-                    opponent_info["hand"][ai_choice[0]], player_info["battle_pile"]
-                )
-
+                if opponent_info["hand"][ai_choice[0]]["value"] == "speed limit":
+                    player_info["speed_pile"] = dealer.play_hazard(
+                        opponent_info["hand"][ai_choice[0]],
+                        player_info["speed_pile"],
+                    )
+                else:
+                    player_info["battle_pile"] = dealer.play_hazard(
+                        opponent_info["hand"][ai_choice[0]],
+                        player_info["battle_pile"],
+                    )
+        opponent_info["hand"] = dealer.discard(
+            opponent_info["hand"][ai_choice[0]], opponent_info["hand"]
+        )
         # opponent_info["battle_pile"] = dealer.play_remedy(
         #     opponent_info["hand"][ai_choice[0]], opponent_info["battle_pile"]
         # )
