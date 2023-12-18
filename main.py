@@ -151,6 +151,8 @@ while keep_going == True:
                         opponent_info["hand"][ai_choice[0]],
                         player_info["battle_pile"],
                     )
+            case "Discard":
+                pass
         opponent_info["hand"] = dealer.discard(
             opponent_info["hand"][ai_choice[0]], opponent_info["hand"]
         )
