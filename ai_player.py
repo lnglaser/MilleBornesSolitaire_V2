@@ -38,7 +38,7 @@ class AI_player:
                             print(f"ai_player - returning choice: {chosen_cards[0]}")
                             return chosen_cards[0]
                         # No miles, no green lights, no hazards
-                        elif chosen_cards == []:
+                        else:
                             random_choice = random.randint(0, 6)
                             chosen_cards = self.ai_info["hand"][random_choice]
                             chosen_cards.update({"card_type": "Discard"})
