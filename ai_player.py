@@ -27,10 +27,11 @@ class AI_player:
                 return chosen_cards[0]
             # No miles, empty battle pile, no green light cards
             elif chosen_cards == []:
+                # Bug - Stops enumerating after first hazard card??
                 print(f"ai_player - no green lights, current hand:")
                 current_hand = enumerate(self.ai_info["hand"])
                 for index, card in current_hand:
-                    print(index, card)
+                    # print(index, card)
                     if card["card_type"] == "Hazard":
                         chosen_cards.append((index, card))
                         print(f"ai_player - Hazard cards: {chosen_cards}")
@@ -38,8 +39,9 @@ class AI_player:
                             print(f"ai_player - returning choice: {chosen_cards[0]}")
                             return chosen_cards[0]
                         # No miles, no green lights, no hazards
-                        else:
+                        elif chosen_cards == []:
                             random_choice = random.randint(0, 6)
+                            print(f"Position of card chosen: {random_choice}")
                             chosen_cards = self.ai_info["hand"][random_choice]
                             chosen_cards.update({"card_type": "Discard"})
                             print(
