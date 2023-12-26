@@ -35,19 +35,19 @@ class AI_player:
                     if card["card_type"] == "Hazard":
                         chosen_cards.append((index, card))
                         print(f"ai_player - Hazard cards: {chosen_cards}")
-                        if chosen_cards != []:
-                            print(f"ai_player - returning choice: {chosen_cards[0]}")
-                            return chosen_cards[0]
-                        # No miles, no green lights, no hazards
-                        elif chosen_cards == []:
-                            random_choice = random.randint(0, 6)
-                            print(f"Position of card chosen: {random_choice}")
-                            chosen_cards = self.ai_info["hand"][random_choice]
-                            chosen_cards.update({"card_type": "Discard"})
-                            print(
-                                f"ai_player - no moves, discarding card: {self.ai_info['hand'][random_choice]}"
-                            )
-                            return chosen_cards
+                    if chosen_cards != []:
+                        print(f"ai_player - returning choice: {chosen_cards[0]}")
+                        return chosen_cards[0]
+                    # No miles, no green lights, no hazards
+                    elif chosen_cards == []:
+                        random_choice = random.randint(0, 6)
+                        print(f"Position of card chosen: {random_choice}")
+                        chosen_cards = self.ai_info["hand"][random_choice]
+                        chosen_cards.update({"card_type": "Discard"})
+                        print(
+                            f"ai_player - no moves, discarding card: {self.ai_info['hand'][random_choice]}"
+                        )
+                        return chosen_cards
 
             # If computer has miles and green light -
             # flip between playing hazard on opponent or playing miles on self?

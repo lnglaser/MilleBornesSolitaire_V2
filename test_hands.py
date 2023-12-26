@@ -1,4 +1,4 @@
-test_hand_no_greeen = [
+test_hand_no_green = [
     {"card_type": "Remedy", "value": "repairs", "match_ID": 3},
     {"card_type": "Safety", "value": "puncture-proof", "match_ID": 1},
     {"card_type": "Remedy", "value": "repairs", "match_ID": 3},

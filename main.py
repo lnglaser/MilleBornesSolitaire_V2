@@ -49,7 +49,7 @@ opponent = AI_player(opponent_info)
 for i in range(dealer.hand_size):
     player_info["hand"].append(dealer.deal_cards(deck))
     # opponent_info["hand"].append(dealer.deal_cards(deck))
-    opponent_info["hand"] = th.test_hand_no_greeen
+    opponent_info["hand"] = th.test_hand_no_green
 
 
 # This section will be for establishing and testing game logic - adjust to remove print
