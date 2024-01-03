@@ -2,7 +2,9 @@ from os import system
 from card_data import card_data
 from deck_builder_2 import DeckBuilder
 from dealer import Dealer
-from ai_player import AI_player
+
+# from ai_player import AI_player
+from ai_player_2 import AI_player
 import test_hands as th
 
 deck_builder = DeckBuilder(card_data)
@@ -49,7 +51,7 @@ opponent = AI_player(opponent_info)
 for i in range(dealer.hand_size):
     player_info["hand"].append(dealer.deal_cards(deck))
     # opponent_info["hand"].append(dealer.deal_cards(deck))
-    opponent_info["hand"] = th.test_hand_no_green
+    opponent_info["hand"] = th.test_hand_has_green
 
 
 # This section will be for establishing and testing game logic - adjust to remove print
