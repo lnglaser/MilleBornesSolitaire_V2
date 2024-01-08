@@ -34,6 +34,7 @@ class AI_player:
         # Case 1 - No miles, battle pile empty - find green light
         if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
             card = play_green(self, current_hand, chosen_cards)
+        # Case 2 - No miles, battle pile empty, no green lights - play hazard
         if card == ():
             card = play_hazard(self, current_hand, chosen_cards)
         return card
