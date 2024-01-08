@@ -30,10 +30,13 @@ class AI_player:
         print(f"ai_player_2 - Computer's current hand: {self.ai_info['hand']}")
         current_hand = enumerate(self.ai_info["hand"])
         chosen_cards = []
+        card = ()
         # Case 1 - No miles, battle pile empty - find green light
         if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
             card = play_green(self, current_hand, chosen_cards)
-            return card
+        if card == ():
+            card = play_hazard(self, current_hand, chosen_cards)
+        return card
 
         # Case 2 - No miles, battle pile empty, no green lights - play hazard
         if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
