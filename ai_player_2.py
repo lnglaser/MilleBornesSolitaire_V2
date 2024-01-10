@@ -1,3 +1,5 @@
+# TODO - Try making list of valid moves instead of choosing one, and have computer pick from that
+
 import random
 
 
@@ -16,6 +18,18 @@ def play_hazard(self, current_hand, chosen_cards):
         if card["card_type"] == "Hazard":
             chosen_cards.append((index, card))
     print(f"Hazard cards: {chosen_cards}")
+    if chosen_cards == []:
+        return
+    else:
+        self.card = chosen_cards[0]
+        return self.card
+
+
+def play_miles(self, current_hand, chosen_cards):
+    for index, card in current_hand:
+        if card["card_type"] == "Miles":
+            chosen_cards.append((index, card))
+    print(f"Mileage cards: {chosen_cards}")
     self.card = chosen_cards[0]
     return self.card
 
@@ -35,13 +49,17 @@ class AI_player:
         if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
             card = play_green(self, current_hand, chosen_cards)
         # Case 2 - No miles, battle pile empty, no green lights - play hazard
-        if card == ():
+        elif (
+            self.ai_info["miles"] == 0
+            and self.ai_info["battle_pile"] == {}
+            and card == ()
+        ):
             card = play_hazard(self, current_hand, chosen_cards)
+        # Case 3 - No miles, battle pile green light - play miles
+        if card == ():
+            card = play_miles(self, current_hand, chosen_cards)
         return card
 
-        # Case 2 - No miles, battle pile empty, no green lights - play hazard
-        if self.ai_info["miles"] == 0 and self.ai_info["battle_pile"] == {}:
-            pass
         # Case 3 - No miles, battle pile green light - play miles
 
         # Case 4 - No miles, battle pile green light, no mile cards - play hazard
