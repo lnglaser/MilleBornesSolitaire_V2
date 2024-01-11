@@ -4,8 +4,9 @@ import random
 
 
 def play_green(self, current_hand, chosen_cards):
-    # current_hand = enumerate(self.ai_info["hand"])
+    current_hand = enumerate(self.ai_info["hand"])
     for index, card in current_hand:
+        print(f"green check: {index, card}")
         if card["value"] == "green light":
             chosen_cards.append((index, card))
     print(f"Green light cards: {chosen_cards}")
@@ -14,6 +15,7 @@ def play_green(self, current_hand, chosen_cards):
 
 
 def play_hazard(self, current_hand, chosen_cards):
+    current_hand = enumerate(self.ai_info["hand"])
     for index, card in current_hand:
         if card["card_type"] == "Hazard":
             chosen_cards.append((index, card))
@@ -26,8 +28,9 @@ def play_hazard(self, current_hand, chosen_cards):
 
 
 def play_miles(self, current_hand, chosen_cards):
+    current_hand = enumerate(self.ai_info["hand"])
     for index, card in current_hand:
-        if card["card_type"] == "Miles":
+        if card["card_type"] == "Mileage":
             chosen_cards.append((index, card))
     print(f"Mileage cards: {chosen_cards}")
     self.card = chosen_cards[0]
@@ -40,9 +43,11 @@ class AI_player:
         self.card = ()
 
     def ai_turn(self):
-        # Enumerate current hand here instead of in each method above:
-        print(f"ai_player_2 - Computer's current hand: {self.ai_info['hand']}")
+        # Enumerate current hand here instead of in each method above (update - hand not passing in?):
+        print(f"ai_player_2 - Computer's current hand: ")
         current_hand = enumerate(self.ai_info["hand"])
+        for index, card in current_hand:
+            print(index, card)
         chosen_cards = []
         card = ()
         # Case 1 - No miles, battle pile empty - find green light
