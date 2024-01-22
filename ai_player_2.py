@@ -6,6 +6,7 @@ import random
 types_in_hand = {"Mileage": False, "Hazard": False, "Remedy": False, "Safety": False}
 
 
+# Iterates through hand and updates values in a dictionary that reflects possession status of card types
 def check_hand_types(self, current_hand):
     current_hand = enumerate(self.ai_info["hand"])
     for index, card in current_hand:
@@ -26,7 +27,7 @@ def play_green(self, current_hand, chosen_cards):
     for index, card in current_hand:
         if card["value"] == "green light":
             chosen_cards.append((index, card))
-    print(f"Green light cards: {chosen_cards}")
+    print(f"ai_player_2, play_green - Green light cards: {chosen_cards}")
     self.card = chosen_cards[0]
     return self.card
 
@@ -80,13 +81,25 @@ class AI_player:
             and self.ai_info["battle_pile"]["value"] != "green light"
         ):
             card = play_green(self, current_hand, chosen_cards)
-        # Case 2 - No miles, battle pile empty, no green lights - play hazard
+        # Move 2 - Identify cases to play a hazard:
+        # a) No miles, battle pile empty, no green lights
+        # b) battle pile hazard, no remedies at all
+        # c) battle pile hazard, no usable remedies (might obviate previous case)
         elif (
             self.ai_info["miles"] == 0
             and self.ai_info["battle_pile"] == {}
             and card == ()
-        ):
-            card = play_hazard(self, current_hand, chosen_cards)
+        ) or (self.ai_info["battle_pile"]["card_type"] == "Hazard"):
+            if types_in_hand["Remedy"] == True:
+                remedy_cards = []
+                for index, card in current_hand:
+                    if card["card_type"] == "Remedy":
+                        remedy_cards.push(card["match_ID"])
+                if self.ai_info["battle_pile"]["match_ID"] not in remedy_cards:
+                    # Note - need to use match_id from card to see if correct remedy is missing
+                    card = play_hazard(self, current_hand, chosen_cards)
+            elif types_in_hand["Remedy"] == False:
+                card = play_hazard(self, current_hand, chosen_cards)
         # Case 3 - No miles, battle pile green light - play miles
         if card == ():
             card = play_miles(self, current_hand, chosen_cards)
