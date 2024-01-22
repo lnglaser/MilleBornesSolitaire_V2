@@ -18,7 +18,7 @@ def check_hand_types(self, current_hand):
             types_in_hand["Remedy"] = True
         elif card["card_type"] == "Safety":
             types_in_hand["Safety"] = True
-        return types_in_hand
+    return types_in_hand
 
 
 def play_green(self, current_hand, chosen_cards):
