@@ -90,6 +90,7 @@ class AI_player:
             and self.ai_info["battle_pile"] == {}
             and card == ()
         ) or (self.ai_info["battle_pile"]["card_type"] == "Hazard"):
+            # Elif statement to see if correct remedy card is present in hand
             if types_in_hand["Remedy"] == True:
                 remedy_cards = []
                 for index, card in current_hand:
@@ -100,7 +101,10 @@ class AI_player:
                     card = play_hazard(self, current_hand, chosen_cards)
             elif types_in_hand["Remedy"] == False:
                 card = play_hazard(self, current_hand, chosen_cards)
-        # Case 3 - No miles, battle pile green light - play miles
+        # Move 3 - Identify cases to play a mileage card:
+        # a) No miles, battle pile green light - play miles
+        # b) Battle pile green light - play miles
+        # c) Speed pile limit, green light - play miles under 50
         if card == ():
             card = play_miles(self, current_hand, chosen_cards)
         return card
