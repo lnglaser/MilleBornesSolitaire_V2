@@ -45,17 +45,28 @@ def play_hazard(self, current_hand, chosen_cards):
         return self.card
 
 
-def play_miles(self, current_hand, chosen_cards):
+def play_miles(self, current_hand, chosen_cards, speed_pile):
     current_hand = enumerate(self.ai_info["hand"])
-    for index, card in current_hand:
-        if card["card_type"] == "Mileage":
-            chosen_cards.append((index, card))
-    print(f"Mileage cards: {chosen_cards}")
-    if chosen_cards == []:
-        return
-    else:
-        self.card = chosen_cards[0]
-        return self.card
+    if speed_pile == "" or speed_pile == "end of limit":
+        for index, card in current_hand:
+            if card["card_type"] == "Mileage":
+                chosen_cards.append((index, card))
+        print(f"Mileage cards: {chosen_cards}")
+        if chosen_cards == []:
+            return
+        else:
+            self.card = chosen_cards[0]
+            return self.card
+    elif speed_pile == "speed limit":
+        for index, card in current_hand:
+            if card["card_type"] == "Mileage" and card["value"] <= 50:
+                chosen_cards.append((index, card))
+        print(f"Mileage cards: {chosen_cards}")
+        if chosen_cards == []:
+            return
+        else:
+            self.card = chosen_cards[0]
+            return self.card
 
 
 class AI_player:
@@ -72,6 +83,7 @@ class AI_player:
         chosen_cards = []
         card = ()
         types_in_hand = check_hand_types(self, current_hand)
+
         # Move 1 - Identify cases to play a green light:
         # a) No miles, blank battle pile
         # b) Battle pile is a non-green light remedy
@@ -81,6 +93,7 @@ class AI_player:
             and self.ai_info["battle_pile"]["value"] != "green light"
         ):
             card = play_green(self, current_hand, chosen_cards)
+
         # Move 2 - Identify cases to play a hazard:
         # a) No miles, battle pile empty, no green lights
         # b) battle pile hazard, no remedies at all
@@ -101,12 +114,20 @@ class AI_player:
                     card = play_hazard(self, current_hand, chosen_cards)
             elif types_in_hand["Remedy"] == False:
                 card = play_hazard(self, current_hand, chosen_cards)
+
         # Move 3 - Identify cases to play a mileage card:
         # a) No miles, battle pile green light - play miles
         # b) Battle pile green light - play miles
         # c) Speed pile limit, green light - play miles under 50
-        if card == ():
-            card = play_miles(self, current_hand, chosen_cards)
+        # - Speed limit check will probably need to go before each of the other cases, instead of
+        # being it's own case; also need to factor into hazard checks
+        elif (
+            self.ai_info["miles"] == 0
+            and self.ai_info["battle_pile"]["value"] == "green light"
+        ):
+            card = play_miles(
+                self, current_hand, chosen_cards, self.ai_info["speed_pile"]
+            )
         return card
 
         # Case 3 - No miles, battle pile green light - play miles
