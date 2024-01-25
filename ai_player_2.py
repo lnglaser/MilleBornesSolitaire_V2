@@ -69,6 +69,10 @@ def play_miles(self, current_hand, chosen_cards, speed_pile):
             return self.card
 
 
+def play_remedy(self, current_hand, chosen_cards, battle_pile, speed_pile):
+    pass
+
+
 class AI_player:
     def __init__(self, info):
         self.ai_info = info
@@ -120,7 +124,7 @@ class AI_player:
         # b) Battle pile green light - play miles
         # c) Speed pile limit, green light - play miles under 50
         # - Speed limit check will probably need to go before each of the other cases, instead of
-        # being it's own case; also need to factor into hazard checks
+        # being its own case; also need to factor into hazard checks
         elif (
             self.ai_info["miles"] == 0
             and self.ai_info["battle_pile"]["value"] == "green light"
@@ -128,8 +132,20 @@ class AI_player:
             card = play_miles(
                 self, current_hand, chosen_cards, self.ai_info["speed_pile"]
             )
+
+        # Move 4 - Identify cases to play a remedy card:
+        # a) Battle pile hazard - play matching remedy
+        # b) Speed pile speed limit - play "end of limit" remedy
+        elif (
+            self.ai_info["battle_pile"]["card_type"] == "Hazard"
+            or self.ai_info["speed_pile"] == "speed limit"
+        ):
+            play_remedy(
+                self,
+                current_hand,
+                chosen_cards,
+                self.ai_info["battle_pile"],
+                self.ai_info["speed_pile"],
+            )
+
         return card
-
-        # Case 3 - No miles, battle pile green light - play miles
-
-        # Case 4 - No miles, battle pile green light, no mile cards - play hazard
