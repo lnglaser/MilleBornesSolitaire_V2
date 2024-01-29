@@ -70,7 +70,24 @@ def play_miles(self, current_hand, chosen_cards, speed_pile):
 
 
 def play_remedy(self, current_hand, chosen_cards, battle_pile, speed_pile):
-    pass
+    current_hand = enumerate(self.ai_info["hand"])
+    if battle_pile["card_type"] == "Hazard":
+        for index, card in current_hand:
+            if (
+                card["card_type"] == "Remedy"
+                and card["match_ID"] == battle_pile["match_ID"]
+            ):
+                chosen_cards.append(index, card)
+    elif speed_pile == "speed limit":
+        for index, card in current_hand:
+            if card["value"] == "end of limit":
+                chosen_cards.append(index, card)
+
+    if chosen_cards == []:
+        return
+    else:
+        self.card = chosen_cards[0]
+        return self.card
 
 
 class AI_player:
@@ -128,7 +145,7 @@ class AI_player:
         elif (
             self.ai_info["miles"] == 0
             and self.ai_info["battle_pile"]["value"] == "green light"
-        ):
+        ) or (self.ai_info["battle_pile"]["value"] == "green light"):
             card = play_miles(
                 self, current_hand, chosen_cards, self.ai_info["speed_pile"]
             )
