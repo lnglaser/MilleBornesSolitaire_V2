@@ -153,7 +153,7 @@ class AI_player:
         # Move 4 - Identify cases to play a remedy card:
         # a) Battle pile hazard - play matching remedy
         # b) Speed pile speed limit - play "end of limit" remedy
-        elif (
+        elif (card == ()) and (
             self.ai_info["battle_pile"]["card_type"] == "Hazard"
             or self.ai_info["speed_pile"] == "speed limit"
         ):
